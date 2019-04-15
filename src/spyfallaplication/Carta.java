@@ -20,5 +20,6 @@ public class Carta {
         this.funcao = funcao;
     }
     
+    // adicionar metodos necessarios 
     
 }
