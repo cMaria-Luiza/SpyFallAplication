@@ -11,6 +11,9 @@ public class SpyFallAplication {
     private ArrayList<Jogador> jogadores = new ArrayList<>(MAX_JOGADORES);
     private List<List<String>> lugares = new ArrayList<>(5);
     private int espiaoID;
+    private static String lugarDaPartida;
+    // private RandomTasksThread gerador;
+    // private Server servidor;
     
     private final int HOSPITAL = 0;
     private final int RESTAURANTE = 1;
@@ -19,9 +22,14 @@ public class SpyFallAplication {
     private final int PARQUE = 4;
     
     public SpyFallAplication() {
+        // cria um arraylist de arraylists
         for(int i = 0; i < 5; i++)  
             lugares.add(new ArrayList<>(3));
-            // lugares.get(0).add("foobar");
+            
+        // inicializa o arraylist de lugares
+        setLugares();
+        sortearLugar();
+        
             
         
     }
@@ -53,16 +61,20 @@ public class SpyFallAplication {
         // sorteia lugar pela posicao na lista de lugares
     }
     
-    public void criarCartas() {
+    public static void criarCartas() {
         // inicializa as cartas, set o lugar sorteado e distribui as funcões entre as cartas 
     }
     
-    public void darCartas() {
+    public static void darCartas() {
         // distribue as cartas para os jogadores
     }
     
     public void sortearEspiao(){
         // atraves da posicão da lista do jogador
+    }
+    
+    public static void setJogadores(ArrayList<Jogador> jogadores) {
+        this.jogadores = jogadores;
     }
     
     
@@ -73,5 +85,5 @@ public class SpyFallAplication {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+
 }
