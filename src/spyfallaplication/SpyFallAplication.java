@@ -2,6 +2,7 @@ package SpyFallAplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SpyFallAplication {
 
@@ -12,6 +13,8 @@ public class SpyFallAplication {
     private List<List<String>> lugares = new ArrayList<>(5);
     private int espiaoID;
     private static String lugarDaPartida;
+    private static int IDlugar;
+
     // private RandomTasksThread gerador;
     // private Server servidor;
     
@@ -58,11 +61,46 @@ public class SpyFallAplication {
     }
     
     public void sortearLugar() {
-        // sorteia lugar pela posicao na lista de lugares
+        Random rand = new Random();
+        int posicao = rand.nextInt(5);
+        IDlugar = posicao;
+        
+        switch (posicao) {
+            case HOSPITAL:
+                lugarDaPartida = "Hospital";
+                break;
+            case RESTAURANTE:
+                lugarDaPartida = "Restaurante";
+                break;
+            case ESCOLA:
+                lugarDaPartida = "Escola";
+                break;
+            case CONCERTO_MUSICAL:
+                lugarDaPartida = "Concerto Musical";
+                break;
+            case PARQUE:
+                lugarDaPartida = "Parque";
+                break;
+        }
     }
     
-    public static void criarCartas() {
-        // inicializa as cartas, set o lugar sorteado e distribui as funcões entre as cartas 
+    public void criarCartas() {
+        Random rand = new Random();
+        // cria as cartas 
+        for(int i = 0; i < 3; i++) {
+            Carta carta = new Carta();
+            cartas.add(carta);
+        }
+        // adiciona o lugar
+        cartas.forEach((c) -> {
+            c.setLugar(lugarDaPartida);
+        });
+        // adiciona as funcoes
+        cartas.forEach((c) -> {
+            int n = rand.nextInt(3);
+            c.setFuncao(lugares.get(IDlugar).get(n)); 
+        });
+        
     }
     
     public static void darCartas() {
@@ -73,7 +111,7 @@ public class SpyFallAplication {
         // atraves da posicão da lista do jogador
     }
     
-    public static void setJogadores(ArrayList<Jogador> jogadores) {
+    public void setJogadores(ArrayList<Jogador> jogadores) {
         this.jogadores = jogadores;
     }
     
