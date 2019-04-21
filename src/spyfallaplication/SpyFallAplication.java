@@ -97,7 +97,7 @@ public class SpyFallAplication {
         });
         // adiciona as funcoes
         cartas.forEach((c) -> {
-            int n = rand.nextInt(3);
+            int n = rand.nextInt(3); // corre o risco de todos receber a mesma funcao VEERIFICAR ISSO!!!!!!
             c.setFuncao(lugares.get(IDlugar).get(n)); 
         });
         
@@ -111,7 +111,7 @@ public class SpyFallAplication {
         // atraves da posicão da lista do jogador
     }
     
-    public void setJogadores(ArrayList<Jogador> jogadores) {
+    public   void setJogadores(ArrayList<Jogador> jogadores) {
         this.jogadores = jogadores;
     }
     

@@ -38,5 +38,9 @@ public class Jogador {
     public int getVotos() {
         return votos;
     }
+    
+    public void rebeberVoto() {
+        votos++;
+    }
 }
 
