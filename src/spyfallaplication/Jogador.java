@@ -1,4 +1,4 @@
-package SpyFallAplication;
+package spyfallaplication;
 
 public class Jogador {
     private String nome;
@@ -8,19 +8,22 @@ public class Jogador {
     private int votos;
     
     
-    public Jogador(String nome, int ID, Carta carta) {
+    public Jogador(String nome) {
         this.nome = nome;
-        this.ID = ID;
-        carta = minhaCarta;
+        //this.ID = ID;
+        //minhaCarta = carta;
         votos = 0;
         
         if (minhaCarta.getLugar() == null)
-            ehEspiao = true;
-        
+            ehEspiao = true; 
     }
     
     public String getNome() {
         return nome;
+    }
+    
+    public void setCarta(Carta carta){
+        this.minhaCarta = carta;
     }
     
     public int getID() {

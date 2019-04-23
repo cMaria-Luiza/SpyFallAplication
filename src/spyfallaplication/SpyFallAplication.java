@@ -1,11 +1,17 @@
-package SpyFallAplication;
+package spyfallaplication;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import spyfallaplication.Menu;
+import spyfallaplication.Jogador;
+import spyfallaplication.Carta;
+
 public class SpyFallAplication {
 
+    Menu menu;
+    
     private final int MAX_JOGADORES = 4;
     
     private ArrayList<Carta> cartas = new ArrayList<>(MAX_JOGADORES);
@@ -111,7 +117,7 @@ public class SpyFallAplication {
         // atraves da posicão da lista do jogador
     }
     
-    public   void setJogadores(ArrayList<Jogador> jogadores) {
+    public void setJogadores(ArrayList<Jogador> jogadores) {
         this.jogadores = jogadores;
     }
     
@@ -122,6 +128,7 @@ public class SpyFallAplication {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new Menu().setVisible(true);
     }
 
 }

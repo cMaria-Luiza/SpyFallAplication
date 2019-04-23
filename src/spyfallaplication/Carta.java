@@ -1,4 +1,4 @@
-package SpyFallAplication;
+package spyfallaplication;
 
 public class Carta {
     private String lugar;
