@@ -3,7 +3,7 @@ package spyfallaplication;
 
 import java.util.Random;
 
-public class Sort implements Runnable {
+public class Sort extends Thread {
     private int valor;
     private int limite;
     private final Random sort = new Random();
@@ -25,9 +25,3 @@ public class Sort implements Runnable {
 
     
     
-    
-    
-    
-    
-    
-}
