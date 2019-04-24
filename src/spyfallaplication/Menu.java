@@ -159,11 +159,11 @@ public class Menu extends javax.swing.JFrame {
                     //Cria o jogador e adiciona no arraylist
                     String name = playerName.getText().trim();
                     Jogador jogador = new Jogador(name);
-                    jogo.setJogadores(jogador); 
+                    jogo.setJogador(jogador); 
                     //Verifica se todos os jogadores entraram
-                    if(!(jogo.sortearLugar())){
+                    /*if(!(jogo.sortearLugar())){
                         esperarJogadores.setVisible(true);
-                    } 
+                    } **/
                 }
             }
         };

@@ -9,14 +9,8 @@ public class Jogador {
     
     
     public Jogador(String nome) {
-        this.nome = nome;
-        
-        //this.ID = ID;
-        //minhaCarta = carta;
-        /*votos = 0;
-        
-        if (minhaCarta.getLugar() == null)
-            ehEspiao = true; */
+       this.nome = nome;
+       ehEspiao = false;
     }
     
     public String getNome() {
@@ -31,11 +25,19 @@ public class Jogador {
         return ID;
     }
     
+    public void setID(int id) {
+        ID = id;
+    }
+    
     public Carta getCarta() {
         return minhaCarta;
     }
         
-    public boolean JogadorEspiao() {
+    public void tornarEspiao() {
+        ehEspiao = true;
+    }
+    
+    public boolean ehEspiao(){
         return ehEspiao;
     }
     
