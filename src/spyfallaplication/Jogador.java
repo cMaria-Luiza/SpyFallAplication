@@ -10,12 +10,13 @@ public class Jogador {
     
     public Jogador(String nome) {
         this.nome = nome;
+        
         //this.ID = ID;
         //minhaCarta = carta;
-        votos = 0;
+        /*votos = 0;
         
         if (minhaCarta.getLugar() == null)
-            ehEspiao = true; 
+            ehEspiao = true; */
     }
     
     public String getNome() {

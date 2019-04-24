@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import spyfallaplication.Menu;
-import spyfallaplication.Jogador;
-import spyfallaplication.Carta;
 
 public class SpyFallAplication {
 
-    Menu menu;
+    private Menu menu;
     
-    private final int MAX_JOGADORES = 4;
+    private static final int MAX_JOGADORES = 4;
     
     private ArrayList<Carta> cartas = new ArrayList<>(MAX_JOGADORES);
-    private ArrayList<Jogador> jogadores = new ArrayList<>(MAX_JOGADORES);
+    private static ArrayList<Jogador> jogadores = new ArrayList<>(MAX_JOGADORES);
     private List<List<String>> lugares = new ArrayList<>(5);
     private int espiaoID;
     private static String lugarDaPartida;
@@ -37,7 +34,7 @@ public class SpyFallAplication {
             
         // inicializa o arraylist de lugares
         setLugares();
-        sortearLugar();
+        //sortearLugar();
         
             
         
@@ -66,28 +63,32 @@ public class SpyFallAplication {
 
     }
     
-    public void sortearLugar() {
-        Random rand = new Random();
-        int posicao = rand.nextInt(5);
-        IDlugar = posicao;
-        
-        switch (posicao) {
-            case HOSPITAL:
-                lugarDaPartida = "Hospital";
-                break;
-            case RESTAURANTE:
-                lugarDaPartida = "Restaurante";
-                break;
-            case ESCOLA:
-                lugarDaPartida = "Escola";
-                break;
-            case CONCERTO_MUSICAL:
-                lugarDaPartida = "Concerto Musical";
-                break;
-            case PARQUE:
-                lugarDaPartida = "Parque";
-                break;
+    public boolean sortearLugar() {
+        if(jogadores.size() == 4){
+            Random rand = new Random();
+            int posicao = rand.nextInt(5);
+            IDlugar = posicao;
+
+            switch (posicao) {
+                case HOSPITAL:
+                    lugarDaPartida = "Hospital";
+                    break;
+                case RESTAURANTE:
+                    lugarDaPartida = "Restaurante";
+                    break;
+                case ESCOLA:
+                    lugarDaPartida = "Escola";
+                    break;
+                case CONCERTO_MUSICAL:
+                    lugarDaPartida = "Concerto Musical";
+                    break;
+                case PARQUE:
+                    lugarDaPartida = "Parque";
+                    break;
+            }
+            return true;
         }
+        return false;
     }
     
     public void criarCartas() {
@@ -117,11 +118,10 @@ public class SpyFallAplication {
         // atraves da posicão da lista do jogador
     }
     
-    public void setJogadores(ArrayList<Jogador> jogadores) {
-        this.jogadores = jogadores;
+    public static void setJogadores(Jogador jogador){
+        jogadores.add(jogador);
+        System.out.println(jogadores.size());
     }
-    
-    
     
     /**
      * @param args the command line arguments

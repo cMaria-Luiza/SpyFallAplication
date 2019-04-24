@@ -6,6 +6,10 @@
 package spyfallaplication;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import javax.swing.SwingUtilities;
+import java.util.concurrent.ExecutionException;
+import javax.swing.JLabel;
 
 /**
  *
@@ -13,12 +17,15 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
     
-
+    private String name;
+    private SpyFallAplication spy;
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        jLabel1.setVisible(false);
+        this.spy = new SpyFallAplication();
     }
 
     /**
@@ -36,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         playerName = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         exit = new javax.swing.JMenuItem();
@@ -64,18 +72,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/luciane/Imagens/SPY/spy (1).png")); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-espião-64.png"))); // NOI18N
+
+        jLabel1.setForeground(new java.awt.Color(254, 247, 247));
+        jLabel1.setText("Esperando outros jogadores");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 352, Short.MAX_VALUE)
-                .addComponent(nome)
-                .addGap(33, 33, 33)
-                .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(432, 432, 432))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -84,9 +90,23 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(553, 553, 553)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(gameName)
-                            .addComponent(jLabel2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(gameName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14)))
+                .addGap(555, 555, 555))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(352, 352, 352)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nome)
+                        .addGap(33, 33, 33)
+                        .addComponent(playerName)
+                        .addGap(432, 432, 432))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,12 +116,16 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(jLabel2)
                 .addGap(96, 96, 96)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nome))
-                .addGap(124, 124, 124)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(nome))
+                    .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1)
+                .addGap(62, 62, 62)
                 .addComponent(btnEntrar)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGap(158, 158, 158))
         );
 
         jMenu1.setText("File");
@@ -125,31 +149,47 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        //Verifica se o jogador preencheu o campo do nome
-        if(playerName.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please enter your name");
-        }
+       
         
-        //Cria o jogador
-        String name = playerName.getText().trim();
-        Jogador jogador = new Jogador(name);
+        
+        Runnable j = new Runnable() {
+            @Override
+            public void run() {
+                 //Verifica se o jogador preencheu o campo do nome
+                if(playerName.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Please enter your name");
+                }
+                else{
+                    //Cria o jogador e adiciona no arraylist
+                    name = playerName.getText().trim();
+                    Jogador jogador = new Jogador(name);
+                    spy.setJogadores(jogador); 
+                    //Verifica se todos os jogadores entraram
+                    while(!(spy.sortearLugar())){
+                        jLabel1.setVisible(true);
+                    }
+                    /*if(!(spy.sortearLugar()))
+                        jLabel1.setVisible(true);*/
+                    
+                }
+            }
+        };
+        
+        SwingUtilities.invokeLater(j);
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
 
@@ -192,6 +232,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JMenuItem exit;
     private javax.swing.JLabel gameName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
