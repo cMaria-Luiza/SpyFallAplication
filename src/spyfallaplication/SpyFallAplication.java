@@ -17,9 +17,6 @@ public class SpyFallAplication {
     private int espiaoID;
     private static String lugarDaPartida;
     private static int IDlugar;
-
-    // private RandomTasksThread gerador;
-    // private Server servidor;
     
     private final int HOSPITAL = 0;
     private final int RESTAURANTE = 1;
@@ -36,7 +33,6 @@ public class SpyFallAplication {
         setLugares();
         //sortearLugar();
         
-            
         
     }
     
@@ -90,7 +86,7 @@ public class SpyFallAplication {
         }
         return false;
     }
-    
+    /*
     public void criarCartas() {
         Random rand = new Random();
         // cria as cartas 
@@ -114,14 +110,22 @@ public class SpyFallAplication {
         // distribue as cartas para os jogadores
     }
     
-    public void sortearEspiao(){
-        // atraves da posicão da lista do jogador
+    public void sorteio() {
+        // sortear espiao
+        Sort sorteio1 = new Sort(MAX_JOGADORES);
+        sorteio1.start();
+            
+        
+        
+        // sortear lugar
+        // sortear funcoes
     }
     
     public static void setJogadores(Jogador jogador){
         jogadores.add(jogador);
         System.out.println(jogadores.size());
     }
+    */
     
     /**
      * @param args the command line arguments
