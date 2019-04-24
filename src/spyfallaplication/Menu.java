@@ -38,15 +38,14 @@ public class Menu extends javax.swing.JFrame {
         image = new javax.swing.JLabel();
         nome = new javax.swing.JLabel();
         playerName = new javax.swing.JTextField();
-        esperarJogadores = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
+        esperarJogadores = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         exit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(696, 469));
 
         jPanel1.setBackground(new java.awt.Color(227, 73, 71));
 
@@ -60,12 +59,8 @@ public class Menu extends javax.swing.JFrame {
         nome.setForeground(new java.awt.Color(255, 255, 255));
         nome.setText("Nome");
 
-        esperarJogadores.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        esperarJogadores.setForeground(new java.awt.Color(255, 255, 255));
-        esperarJogadores.setText("Esperando jogadores");
-
-        btnEntrar.setBackground(new java.awt.Color(190, 73, 71));
-        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setBackground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setForeground(new java.awt.Color(227, 73, 71));
         btnEntrar.setText("Entrar");
         btnEntrar.setBorderPainted(false);
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +68,11 @@ public class Menu extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
+
+        esperarJogadores.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        esperarJogadores.setForeground(new java.awt.Color(255, 255, 255));
+        esperarJogadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Ball-1s-31px.gif"))); // NOI18N
+        esperarJogadores.setText("Esperando jogadores");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,18 +86,17 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(image)
                             .addComponent(gameName)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
+                        .addGap(213, 213, 213)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(esperarJogadores)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(nome)
                                 .addGap(18, 18, 18)
-                                .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(242, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(288, 288, 288))
+                                .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(311, 311, 311)
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,11 +109,11 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nome)
                     .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(esperarJogadores)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -162,7 +161,7 @@ public class Menu extends javax.swing.JFrame {
                     Jogador jogador = new Jogador(name);
                     jogo.setJogadores(jogador); 
                     //Verifica se todos os jogadores entraram
-                    while(!(jogo.sortearLugar())){
+                    if(!(jogo.sortearLugar())){
                         esperarJogadores.setVisible(true);
                     } 
                 }
