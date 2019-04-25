@@ -153,17 +153,17 @@ public class Menu extends javax.swing.JFrame {
             public void run() {
                  //Verifica se o jogador preencheu o campo do nome
                 if(playerName.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Por favor insera seu nome");
+                    JOptionPane.showMessageDialog(null, "Por favor insira seu nome");
                 }
                 else{
                     //Cria o jogador e adiciona no arraylist
                     String name = playerName.getText().trim();
                     Jogador jogador = new Jogador(name);
                     jogo.setJogador(jogador); 
-                    //Verifica se todos os jogadores entraram
-                    /*if(!(jogo.sortearLugar())){
+                    
+                    if (!(jogo.salaCompleta())) {
                         esperarJogadores.setVisible(true);
-                    } **/
+                    }
                 }
             }
         };

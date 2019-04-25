@@ -74,6 +74,10 @@ public class SpyFallAplication {
         System.out.println(lugarDaPartida);
     }
     
+    public boolean salaCompleta() {
+        return jogadores.size() == MAX_JOGADORES;
+    }
+    
     public static void setJogador(Jogador jogador){
         jogadores.add(jogador);
         jogador.setID(jogadores.size()-1);
