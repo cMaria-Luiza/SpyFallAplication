@@ -122,7 +122,7 @@ import javax.swing.JTextField;
             bfwriter.append("Desconectado \r \n");
         }else{
             bfwriter.write(msg + "\r \n");
-            bfwriter.append( txtNome + ":  " + msg + "\r \n");            
+            bfwriter.append( txtNome.getText() + ":  " + msg + "\r \n");            
         }
         bfwriter.flush();
         txtMsg.setText("");
