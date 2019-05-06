@@ -151,19 +151,32 @@ public class Menu extends javax.swing.JFrame {
         Runnable j = new Runnable() {
             @Override
             public void run() {
-                 //Verifica se o jogador preencheu o campo do nome
-                if(playerName.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Por favor insira seu nome");
+                //Verifica se o jogador preencheu o campo do nome
+                if(playerName.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor insira seu nome");                    
                 }
                 else{
+                    if (!(jogo.salaCompleta())) {
+                        esperarJogadores.setVisible(true);
+                    }
+                    else {   // verifica se a sala está cheia, se estiver, não eh possivel se cadastrar
+                        JOptionPane.showMessageDialog(null, "Sala cheia");
+                        return;
+                    }
+                    
+                    // verifica se o nome já foi cadastrado
+                    for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
+                        if(jogo.getJogador(i) != null && (playerName.getText() == null ? jogo.getJogador(i).getNome() == null : playerName.getText().equals(jogo.getJogador(i).getNome()))) {
+                            JOptionPane.showMessageDialog(null, "Por favor insira um nome diferente");
+                            return;
+                        }
+                    }
                     //Cria o jogador e adiciona no arraylist
                     String name = playerName.getText().trim();
                     Jogador jogador = new Jogador(name);
                     jogo.setJogador(jogador); 
-                    
-                    if (!(jogo.salaCompleta())) {
-                        esperarJogadores.setVisible(true);
-                    }
+                    if(jogo.salaCompleta())
+                        esperarJogadores.setVisible(false);
                 }
             }
         };
