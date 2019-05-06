@@ -117,7 +117,7 @@ public class SpyFallAplication {
     }
     
     public void fim() {
-        if(jogadorMaisVotado.ehEspiao()){
+        if(!(jogadorMaisVotado.ehEspiao())){
             espiaoGanhou();
         }
     }
