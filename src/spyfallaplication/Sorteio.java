@@ -1,14 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package spyfallaplication;
 
-/**
- *
- * @author maluc
- */
-public class Sorteio {
+import java.util.Random;
+
+public class Sort implements Runnable {
+    private int valor;
+    private int limite;
+    private final Random sort = new Random();
     
+    public Sort(int limite) {
+        this.limite = limite;
+    } 
+
+    @Override
+    public void run() {
+        
+        int numeroSorteado = sort.nextInt(limite);
+        valor = numeroSorteado;
+    }
+    
+    public int getValor() {
+        return valor;
+    }
+
 }
+   
