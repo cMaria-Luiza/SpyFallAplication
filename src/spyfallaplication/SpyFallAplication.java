@@ -1,8 +1,6 @@
 package spyfallaplication;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 public class SpyFallAplication {
@@ -18,6 +16,8 @@ public class SpyFallAplication {
     private int espiaoID;
     private static String lugarDaPartida;
     private static int lugarID;
+    private Jogador jogadorMaisVotado;
+    private boolean espiaoGanhou;
     
     private final int HOSPITAL = 0;
     private final int RESTAURANTE = 1;
@@ -59,14 +59,14 @@ public class SpyFallAplication {
     
     public void sorteios() {
         // sortear espiao
-        Sort sorteio1 = new Sort(MAX_JOGADORES);
+        Sorteio sorteio1 = new Sorteio(MAX_JOGADORES);
         sorteio1.run();
         espiaoID = sorteio1.getValor();
         
         System.out.println("ID do espiao = " + espiaoID);
         
         // sortear lugar
-        Sort sorteio2 = new Sort(NUM_LUGARES);
+        Sorteio sorteio2 = new Sorteio(NUM_LUGARES);
         sorteio2.run();
         lugarID = sorteio2.getValor();
         lugarDaPartida = lugares.get(lugarID);
@@ -74,7 +74,7 @@ public class SpyFallAplication {
         System.out.println(lugarDaPartida);
     }
     
-    public boolean salaCompleta() {
+    public static boolean salaCompleta() {
         return jogadores.size() == MAX_JOGADORES;
     }
     
@@ -82,6 +82,17 @@ public class SpyFallAplication {
         jogadores.add(jogador);
         jogador.setID(jogadores.size()-1);
         System.out.println(jogadores.size());
+    }
+    
+    public int quantJogadoresOn() {
+        return jogadores.size();
+    }
+    
+    public Jogador getJogador(int posicao) {
+        if(posicao > 3 || posicao < 0) 
+            return null;
+        
+        return jogadores.get(posicao);
     }
     
     private void setLugares() {
@@ -92,12 +103,34 @@ public class SpyFallAplication {
         lugares.add("Praça");
     }
     
+    public void votar(Jogador jogador) {
+        jogador.receberVoto();
+    }
+    
+    public void contarVotos() {
+        int maior = 0;
+        for(Jogador jogador: jogadores) {
+            if (jogador.getVotos() > maior) {
+                jogadorMaisVotado = jogador;
+            } 
+        }
+    }
+    
+    public void fim() {
+        if(jogadorMaisVotado.ehEspiao()){
+            espiaoGanhou();
+        }
+    }
+    
+    public void espiaoGanhou() {
+        espiaoGanhou = true;
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Menu().setVisible(true);
+        new Menu().setVisible(true);     
     }
 
 }
