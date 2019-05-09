@@ -12,10 +12,6 @@ import java.util.logging.Logger;
 public class Cliente {
     private Socket socket;
 
-    /**
-     * @param args the command line arguments
-     */
-    
     public  void conectar(){
         try {
             socket = new Socket("localhost", 12345);
@@ -24,13 +20,16 @@ public class Cliente {
         }
     } 
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Cliente jogo = new Cliente();
         jogo.conectar();
-        new SpyFallAplication();
+        SpyFallAplication spyFallAplication = new SpyFallAplication();
         Menu janelaPrincipal =  new Menu();
         janelaPrincipal.setVisible(true);   
-        
 
     }
     

@@ -148,7 +148,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        Runnable j = new Runnable() {
+        Runnable j;
+        j = new Runnable() {
             @Override
             public void run() {
                 //Verifica se o jogador preencheu o campo do nome
@@ -175,10 +176,13 @@ public class Menu extends javax.swing.JFrame {
                     String name = playerName.getText().trim();
                     Jogador jogador = new Jogador(name);
                     jogo.setJogador(jogador); 
-                   
+                    Chat chat = new Chat();
+                    chat.setVisible(true);
+           
                     if(jogo.salaCompleta())
                         esperarJogadores.setVisible(false);
                 }
+                
             }
         };
         
@@ -219,8 +223,10 @@ public class Menu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Menu().setVisible(true);
+                
             }
         });
     }
