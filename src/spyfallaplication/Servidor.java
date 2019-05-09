@@ -43,14 +43,11 @@ public class Servidor extends Thread {
              this.input = con.getInputStream();
              this.inr = new InputStreamReader(input);
              bfr = new BufferedReader(inr);
-             //this.setLugares();
-             
-             
          } catch(IOException ex){
              ex.printStackTrace();
          }
      }   
-<<<<<<< HEAD
+
      
      private static void setLugares() {
         lugares.add("Hospital");
@@ -77,14 +74,13 @@ public class Servidor extends Thread {
         
         System.out.println(lugarDaPartida);
     }
-=======
->>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
+
      
     public static void main(String[] args){
       try{
         servidor = new ServerSocket(12345);
         jogadores = new ArrayList<BufferedWriter>();
-<<<<<<< HEAD
+
         
         setLugares();
         sorteios();
@@ -93,14 +89,7 @@ public class Servidor extends Thread {
             System.out.println("Aguardando conexão...");
             Socket con = servidor.accept();
             System.out.println("Cliente Conectado...");
-=======
-       
-           
-           while(true){
-               System.out.println("Aguardando conexão...");
-               Socket con = servidor.accept();
-               System.out.println("Cliente Conectado...");
->>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
+
                
             Thread t = new Servidor(con);
             t.start();
