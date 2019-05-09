@@ -1,14 +1,23 @@
 package spyfallaplication;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SpyFallAplication {
 
     private Menu menu;
+<<<<<<< HEAD
     private static Servidor servidor;
     
     private static final int MAX_JOGADORES = 2;
+=======
+
+    private static final int MAX_JOGADORES = 4;
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
     private static final int NUM_LUGARES = 5;
     
     private ArrayList<Carta> cartas = new ArrayList<>(MAX_JOGADORES);
@@ -124,6 +133,7 @@ public class SpyFallAplication {
     public void espiaoGanhou() {
         espiaoGanhou = true;
     }
+<<<<<<< HEAD
     
     /**
      * @param args the command line arguments
@@ -132,5 +142,7 @@ public class SpyFallAplication {
         
  
     }
+=======
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
 
 }

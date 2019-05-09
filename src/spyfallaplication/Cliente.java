@@ -11,6 +11,7 @@ import java.util.logging.Logger;
  */
 public class Cliente {
     private Socket socket;
+<<<<<<< HEAD
     private SpyFallAplication jogo;
 
     /*public Cliente(SpyFallAplication jogo){
@@ -21,6 +22,9 @@ public class Cliente {
      * @param args the command line arguments
      */
     
+=======
+
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
     public  void conectar(){
         try {
             socket = new Socket("localhost", 12345);
@@ -29,6 +33,7 @@ public class Cliente {
         }
     } 
     
+<<<<<<< HEAD
     public static void main(String[] args) {
         //new Cliente();
         new Cliente().conectar();
@@ -36,6 +41,18 @@ public class Cliente {
         Menu janelaPrincipal =  new Menu(new SpyFallAplication());
         janelaPrincipal.setVisible(true);  
         
+=======
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Cliente jogo = new Cliente();
+        jogo.conectar();
+        SpyFallAplication spyFallAplication = new SpyFallAplication();
+        Menu janelaPrincipal =  new Menu();
+        janelaPrincipal.setVisible(true);   
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
 
     }
     

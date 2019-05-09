@@ -186,6 +186,7 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
        
         Runnable j = new Runnable(){
@@ -193,11 +194,22 @@ public class Menu extends javax.swing.JFrame {
                 
                 if(playerName.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null, "Por favor insira seu nome");
+=======
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Runnable j;
+        j = new Runnable() {
+            @Override
+            public void run() {
+                //Verifica se o jogador preencheu o campo do nome
+                if(playerName.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor insira seu nome");                    
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
                 }
                  else{
                     
                         esperar();
                     
+<<<<<<< HEAD
                     
                        
                 }
@@ -206,6 +218,26 @@ public class Menu extends javax.swing.JFrame {
                 Jogador jogador = new Jogador(name);
                 jogo.setJogador(jogador);
 
+=======
+                    // verifica se o nome já foi cadastrado
+                    for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
+                        if(jogo.getJogador(i) != null && (playerName.getText() == null ? jogo.getJogador(i).getNome() == null : playerName.getText().equals(jogo.getJogador(i).getNome()))) {
+                            JOptionPane.showMessageDialog(null, "Por favor insira um nome diferente");
+                            return;
+                        }
+                    }
+                    //Cria o jogador e adiciona no arraylist
+                    String name = playerName.getText().trim();
+                    Jogador jogador = new Jogador(name);
+                    jogo.setJogador(jogador); 
+                    Chat chat = new Chat();
+                    chat.setVisible(true);
+           
+                    if(jogo.salaCompleta())
+                        esperarJogadores.setVisible(false);
+                }
+                
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
             }
         };
         
@@ -272,8 +304,14 @@ public class Menu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
+<<<<<<< HEAD
                 new Menu(new SpyFallAplication()).setVisible(true);
+=======
+                new Menu().setVisible(true);
+                
+>>>>>>> b40082d8dbcb2a83f22825644b50bf8c90907cbd
             }
         });
     }
