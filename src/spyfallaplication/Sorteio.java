@@ -3,12 +3,12 @@ package spyfallaplication;
 
 import java.util.Random;
 
-public class Sort implements Runnable {
+public class Sorteio implements Runnable {
     private int valor;
     private int limite;
     private final Random sort = new Random();
     
-    public Sort(int limite) {
+    public Sorteio(int limite) {
         this.limite = limite;
     } 
 

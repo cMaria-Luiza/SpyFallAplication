@@ -6,16 +6,17 @@ import java.util.ArrayList;
 public class SpyFallAplication {
 
     private Menu menu;
+    private static Servidor servidor;
     
-    private static final int MAX_JOGADORES = 4;
+    private static final int MAX_JOGADORES = 2;
     private static final int NUM_LUGARES = 5;
     
     private ArrayList<Carta> cartas = new ArrayList<>(MAX_JOGADORES);
     private static ArrayList<Jogador> jogadores = new ArrayList<>(MAX_JOGADORES);
-    private ArrayList<String> lugares = new ArrayList<>(NUM_LUGARES);
-    private int espiaoID;
-    private static String lugarDaPartida;
-    private static int lugarID;
+    //private ArrayList<String> lugares = new ArrayList<>(NUM_LUGARES);
+    //private int espiaoID;
+    //private static String lugarDaPartida;
+    //private static int lugarID;
     private Jogador jogadorMaisVotado;
     private boolean espiaoGanhou;
     
@@ -26,14 +27,12 @@ public class SpyFallAplication {
     private final int PRACA = 4;
     
     public SpyFallAplication() {
-        setLugares();      
-        sorteios();
-        
-        
+            //setLugares();
+            //sorteios();
+            //new Cliente(this);
     }
     
-    
-    public void criarCartas() {
+    /*public void criarCartas() {
         // criar carta do espiao 
         Carta espiao = new Carta(null);
         cartas.add(espiao);
@@ -53,11 +52,10 @@ public class SpyFallAplication {
             else 
                 jog.setCarta(cartas.get(i)); 
         }
-        
-        
-    }
+    }*/
     
-    public void sorteios() {
+    /*public void sorteios() {
+        
         // sortear espiao
         Sorteio sorteio1 = new Sorteio(MAX_JOGADORES);
         sorteio1.run();
@@ -72,9 +70,10 @@ public class SpyFallAplication {
         lugarDaPartida = lugares.get(lugarID);
         
         System.out.println(lugarDaPartida);
-    }
+    }*/
     
     public static boolean salaCompleta() {
+        System.out.println(jogadores.size());
         return jogadores.size() == MAX_JOGADORES;
     }
     
@@ -95,13 +94,13 @@ public class SpyFallAplication {
         return jogadores.get(posicao);
     }
     
-    private void setLugares() {
+    /*private void setLugares() {
         lugares.add("Hospital");
         lugares.add("Restaurante");
         lugares.add("Escola");
         lugares.add("Concerto Musical");
         lugares.add("Praça");
-    }
+    }*/
     
     public void votar(Jogador jogador) {
         jogador.receberVoto();
@@ -130,7 +129,8 @@ public class SpyFallAplication {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Menu().setVisible(true);     
+        
+ 
     }
 
 }
