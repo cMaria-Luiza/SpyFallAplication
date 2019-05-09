@@ -1,12 +1,17 @@
 package spyfallaplication;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SpyFallAplication {
 
     private Menu menu;
-    
+    private Socket socket;
+
     private static final int MAX_JOGADORES = 4;
     private static final int NUM_LUGARES = 5;
     
@@ -126,10 +131,19 @@ public class SpyFallAplication {
         espiaoGanhou = true;
     }
     
+    public  void conectar(){
+        try {
+            socket = new Socket("localhost", 12345);
+        } catch (IOException ex) {
+            Logger.getLogger(SpyFallAplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        SpyFallAplication jogo = new SpyFallAplication();
+        jogo.conectar();
         new Menu().setVisible(true);     
     }
 
