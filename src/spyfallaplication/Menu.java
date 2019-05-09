@@ -175,7 +175,7 @@ public class Menu extends javax.swing.JFrame {
                     String name = playerName.getText().trim();
                     Jogador jogador = new Jogador(name);
                     jogo.setJogador(jogador); 
-                    Chat discussao = new Chat();
+                   
                     if(jogo.salaCompleta())
                         esperarJogadores.setVisible(false);
                 }
