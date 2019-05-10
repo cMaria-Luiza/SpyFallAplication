@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Vanessa
  */
-public class Chat extends javax.swing.JFrame {
+public class Chat extends javax.swing.JFrame implements Runnable {
    private Socket socket;
         private OutputStream output;
         private Writer outwriter;
@@ -151,7 +151,8 @@ public class Chat extends javax.swing.JFrame {
             bfwriter.append("Desconectado \r \n");
         }else{
             bfwriter.write(msg + "\r \n");
-            bfwriter.append( txtNome + ":  " + msg + "\r \n");            
+            bfwriter.append( txtNome.getText() + ":  " + msg + "\r \n"); 
+            texto.append(txtNome.getText() + ":  " + msg + "\r\n");
         }
         bfwriter.flush();
         txtMsg.setText("");
@@ -195,10 +196,7 @@ public class Chat extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
-
-
-    
-    
+ 
     
     /**
      * @param args the command line arguments
@@ -238,11 +236,9 @@ public class Chat extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-           //   new Chat().setVisible(true);
-                
-             
-              
-            }
+           //   new Chat().setVisible(true)
+            
+        }
         });
     }
     
@@ -261,4 +257,9 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JTextArea txtMsg;
     private javax.swing.JLabel txtNome;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

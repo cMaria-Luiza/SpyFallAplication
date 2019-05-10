@@ -97,11 +97,11 @@ public class Servidor extends Thread {
           
            while(true){
                System.out.println("Aguardando conexão...");
-                Socket socket = servidor.accept();
-                Runnable processaJogador = new Cliente();
-                Thread processo = new Thread(processaJogador);
-                processo.start();
-               System.out.println("Cliente Conectado...");               
+               Socket con = servidor.accept();
+               System.out.println("Cliente Conectado...");
+               
+               Thread t = new Servidor(con);
+               t.start();
            }
           
        } catch (HeadlessException | NumberFormatException | IOException ex){

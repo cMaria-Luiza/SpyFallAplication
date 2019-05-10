@@ -167,9 +167,7 @@ public class Menu extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Por favor insira seu nome");                    
 
                 }
-                else{
-                    esperar();       
-                }
+                
                 // verifica se o nome já foi cadastrado
                 /*for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
                     if(jogo.getJogador(i) != null && (playerName.getText() == null ? 
@@ -182,37 +180,13 @@ public class Menu extends javax.swing.JFrame {
                 //Cria o jogador e adiciona no arraylist
                 String name = playerName.getText().trim();
                 Jogador jogador = new Jogador(name);
-                Servidor.j.add(jogador);
-                System.out.println(Servidor.j.size());
+               
             }
         };
         
         SwingUtilities.invokeLater(j);
     }                                         
 
-    private void esperar(){
-        new Thread(new Runnable(){
-            public void run(){
-                while(Servidor.j.size() != 4){
-                    esperarJogadores.setVisible(true);
-                }
-                
-                CardLayout cartas = (CardLayout) root.getLayout();
-                cartas.show(root, "cartas");
-            }
-            
-        }).start();
-     
-            
-        /*try {
-            Chat chat = new Chat();
-            chat.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-            
-      
-    }
     
     /**
      * @param args the command line arguments
