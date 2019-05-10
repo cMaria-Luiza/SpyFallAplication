@@ -29,7 +29,7 @@ public class Servidor extends Thread {
      private InputStreamReader inr;
      private BufferedReader bfr;
      
-     public Servidor(Socket con){
+   public Servidor(Socket con){
          this.con = con;
          try{
              // cria um objeto BufferedReader() que aponta para o stream do cliente socket
@@ -42,7 +42,7 @@ public class Servidor extends Thread {
              ex.printStackTrace();
          }
      }
-     
+        
      /*
         Toda vez que um novo cliente acessar o servidor
         o metodo run() sera acionado e alocado numa thread.
@@ -50,21 +50,41 @@ public class Servidor extends Thread {
      */
      @Override
      public void run(){
-        String mensagem = null;
-        while(true && !servidor.isClosed()) {	
-            try {
-                mensagem = bfr.readLine() ;
-            } catch (IOException e) {
-		System.out.println("## ERRO: Ao ler mensagem do cliente ##");
-		e.printStackTrace();
-            }
-            if (mensagem != null) {
-                System.out.println("=> Mensagem Recebida");
-                System.out.println(mensagem);
-            }   
-	}
-    }	
-    
+   try{
+             String mensagem;
+             OutputStream output = this.con.getOutputStream();
+             Writer ouw = new OutputStreamWriter(output);
+             BufferedWriter bfw = new BufferedWriter(ouw);
+             jogadores.add(bfw);
+             nome = mensagem = bfr.readLine();
+                          
+             while(!"Sair".equalsIgnoreCase(mensagem)){
+                 mensagem = bfr.readLine();
+                 enviar(bfw, mensagem);
+                 System.out.println(mensagem);
+             }
+         } catch(IOException ex){
+             ex.printStackTrace();
+         }
+     }
+     
+      public void enviar (BufferedWriter saida, String msg){
+         BufferedWriter bws;
+         
+         for(BufferedWriter bw : jogadores){
+             bws = (BufferedWriter)bw;
+             
+             if(!(saida == bws)){
+                 try {
+                     bw.write(nome + ": " + msg + "\r \n");
+                     bw.flush();
+                 } catch (IOException ex) {
+                     Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }
+         }   
+     }
+     
     /**
      * @param args the command line arguments
      */

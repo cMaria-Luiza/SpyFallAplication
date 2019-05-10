@@ -9,21 +9,18 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Vanessa
  */
 public class Chat extends javax.swing.JFrame {
-    private OutputStream ou;
-    private Writer ouw;
-    private BufferedWriter bfw;
-    private Servidor servidor;
-    private Socket socket;
+   private Socket socket;
+        private OutputStream output;
+        private Writer outwriter;
+        private BufferedWriter bfwriter;
     
     public Chat() throws IOException {
         initComponents();
@@ -31,13 +28,13 @@ public class Chat extends javax.swing.JFrame {
     
     public void conectar() throws IOException{
     
-        socket = new Socket("localhost", 12345);
-        ou = socket.getOutputStream();
-        ouw = new OutputStreamWriter(ou);
-        bfw = new BufferedWriter(ouw);
-        bfw.write(txtNome.getText());
-        bfw.flush();
-       
+        socket = new Socket("127.0.0.1", 12345);
+        output = socket.getOutputStream();
+        outwriter = new OutputStreamWriter(output);
+        bfwriter = new BufferedWriter(outwriter);
+        bfwriter.write(txtNome.getText());
+        bfwriter.flush();
+     
     }
     
     /**
@@ -148,39 +145,45 @@ public class Chat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public void enviarMensagem(String msg) throws IOException{
-        
-        try {
-            System.out.println("=> Enviando mensagem: " + msg);
-            bfw.write(msg) ;
-            bfw.flush();
-	} catch (IOException e) {
-            System.out.println("## ERRO: Ao enviar mensagem");
-            e.printStackTrace();
-	}
-        
+    public void enviarMensagem(String msg) throws IOException {
+        if(msg.equals("Sair")){
+            bfwriter.write("Desconectado \r \n");
+            bfwriter.append("Desconectado \r \n");
+        }else{
+            bfwriter.write(msg + "\r \n");
+            bfwriter.append( txtNome + ":  " + msg + "\r \n");            
+        }
+        bfwriter.flush();
+        txtMsg.setText("");
     }
     
+    
     public void escutar() throws IOException{
-        InputStream in = socket.getInputStream();
-        InputStreamReader inr = new InputStreamReader(in);
+        InputStream input = socket.getInputStream();
+        InputStreamReader inr = new InputStreamReader(input);
         BufferedReader bfr = new BufferedReader(inr);
         String msg = "";
         
-        while(true){
+        while(!"Sair".equalsIgnoreCase(msg)){
             if(bfr.ready()){
                 msg = bfr.readLine();
-                texto.append(msg + "\r\n");
-                
-            }
+            if(msg.equals("Sair"))
+                texto.append("Servidor caiu! \r \n");
+             else
+                texto.append(msg + "\r \n");              
+            }   
         }
     }
+    
     public void sair() throws IOException{
-        bfw.close();
-        ouw.close();
-        ou.close();
+        enviarMensagem("Sair");
+        bfwriter.close();
+        outwriter.close();
+        output.close();
         socket.close();
     }
+    
+    
     
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         if(evt.getActionCommand().equals(btnEnviar.getActionCommand())){
@@ -225,14 +228,10 @@ public class Chat extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-            Scanner scanner = new Scanner(System.in) ;
-		Chat cliente = new Chat();
-		cliente.conectar();
-		String mensagem = null ;
-		System.out.println("Digite uma mensagem e tecle enter, para sair digite bye");
-		while (!(mensagem = scanner.nextLine()).equalsIgnoreCase("bye") ) {
-			cliente.enviarMensagem(mensagem);
-		}
+        Chat app = new Chat();
+        app.conectar();
+        app.setVisible(true);
+        app.escutar();
 		
        
       
