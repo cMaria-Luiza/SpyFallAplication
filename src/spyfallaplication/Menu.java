@@ -21,7 +21,6 @@ import static javafx.application.Platform.exit;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-
 /**
  *
  * @author luciane
@@ -30,9 +29,10 @@ public class Menu extends javax.swing.JFrame {
 
     private SpyFallAplication jogo;
     private Socket socket;
-    private Timer objTimer;
+    private Timer objTimer1;
+    private Timer objTimer2;
     private int cont;
-     
+
     /**
      * Creates new form Menu
      */
@@ -41,33 +41,39 @@ public class Menu extends javax.swing.JFrame {
         conectar();
         esperarJogadores.setVisible(false);
         this.jogo = jogo;
-        objTimer = new Timer(((1000*60)), taskPerformer); 
-        objTimer.setRepeats(false); 
         cont = 0;
+        objTimer1 = new Timer(((1000 * 60)*3), taskPerformer1);
+        objTimer2 = new Timer(((1000 * 30)*3), taskPerformer2);
+        objTimer1.setRepeats(false);
+        objTimer2.setRepeats(false);
     }
     
-    ActionListener taskPerformer = new ActionListener() {
-    public void actionPerformed(ActionEvent evt) 
-    {
-       //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 3m;
-        if(cont == 0){
+   
+    ActionListener taskPerformer1 = new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 3m;
             try {
                 JOptionPane.showMessageDialog(null, "Votação");
-               // this.wait(100000);
-               objTimer.setDelay(1000*30);
-               objTimer.getDelay();
-                JOptionPane.showMessageDialog(null, "O espião é o jogador(a) " + jogo.getJogador(jogo.getEspiao()).getNome());
-                 System.exit(0); 
-                
+                objTimer2.start();
             } catch (Throwable ex) {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "O espião é o jogador(a) " + jogo.getJogador(jogo.getEspiao()).getNome());
-            System.exit(0);
+
         }
-    }
-};
+    };
+    ActionListener taskPerformer2 = new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 3m;
+            try {
+                JOptionPane.showMessageDialog(null, "O espião é o jogador(a) " + jogo.getJogador(jogo.getEspiao()).getNome());
+                System.exit(0);
+
+            } catch (Throwable ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -407,12 +413,11 @@ public class Menu extends javax.swing.JFrame {
             @Override
             public void run() {
                 //Verifica se o jogador preencheu o campo do nome
-                if(playerName.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Por favor insira seu nome");                    
+                if (playerName.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor insira seu nome");
 
-                }
-                else{
-                    esperar();       
+                } else {
+                    esperar();
                 }
                 // verifica se o nome já foi cadastrado
                 /*for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
@@ -422,16 +427,15 @@ public class Menu extends javax.swing.JFrame {
                         return;
                     }
                 }*/
-                
+
                 //Cria o jogador e adiciona no arraylist
                 String name = playerName.getText().trim();
                 Jogador jogador = new Jogador(name);
                 jogo.setJogador(jogador);
-              
-                
+
             }
         };
-        
+
         SwingUtilities.invokeLater(j);
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -445,93 +449,73 @@ public class Menu extends javax.swing.JFrame {
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
-     
-     public  void conectar(){
+    public void conectar() {
         try {
             socket = new Socket("localhost", 12345);
         } catch (IOException ex) {
             Logger.getLogger(SpyFallAplication.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
-    
- 
-    
-    private void esperar(){
-        new Thread(new Runnable(){
-            public void run(){
-                
+    }
+
+    private void esperar() {
+        new Thread(new Runnable() {
+            public void run() {
+
                 CardLayout card = (CardLayout) root.getLayout();
-                
+
                 concerto.setVisible(false);
                 espiao.setVisible(false);
                 escola.setVisible(false);
                 hospital.setVisible(false);
                 praca.setVisible(false);
                 restaurante.setVisible(false);
-                
+
                 System.out.println(jogo.getEspiao());
                 System.out.println(jogo.getLugar());
-                
-                
-                if(jogo.getLugar() == 3 && jogo.jogadorID() != jogo.getEspiao()){
+
+                if (jogo.getLugar() == 3 && jogo.jogadorID() != jogo.getEspiao()) {
                     card.show(root, "carta1");
                     concerto.setVisible(true);
-                }
-                else if(jogo.getLugar() == 1 && jogo.jogadorID() != jogo.getEspiao()){
+                } else if (jogo.getLugar() == 1 && jogo.jogadorID() != jogo.getEspiao()) {
                     card.show(root, "carta6");
                     restaurante.setVisible(true);
-                }
-                else if(jogo.getLugar() == 0 && jogo.jogadorID() != jogo.getEspiao()){
+                } else if (jogo.getLugar() == 0 && jogo.jogadorID() != jogo.getEspiao()) {
 
                     card.show(root, "carta4");
                     hospital.setVisible(true);
-                }
-                else if(jogo.getLugar() == 2 && jogo.jogadorID() != jogo.getEspiao()){
-      
+                } else if (jogo.getLugar() == 2 && jogo.jogadorID() != jogo.getEspiao()) {
+
                     card.show(root, "carta3");
                     escola.setVisible(true);
-                }
-                else if(jogo.getLugar() == 4 && jogo.jogadorID() != jogo.getEspiao()){
+                } else if (jogo.getLugar() == 4 && jogo.jogadorID() != jogo.getEspiao()) {
 
                     card.show(root, "carta5");
                     praca.setVisible(true);
-                }
-                else if(jogo.jogadorID() == jogo.getEspiao()){
+                } else if (jogo.jogadorID() == jogo.getEspiao()) {
                     card.show(root, "carta2");
                     espiao.setVisible(true);
                 }
-                  try {
+                try {
                     Chat chat = new Chat();
                     chat.setNome(playerName.getText().trim());
                     chat.setVisible(true);
+                    objTimer1.start();
                     chat.conectar();
-                    objTimer.start();
                     chat.escutar();
-                  
 
-                    
-                    
                 } catch (IOException ex) {
                     Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
-            
-            
+
         }).start();
-     
-            
-        
-            
-      
+
     }
-    
-   
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -559,11 +543,8 @@ public class Menu extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-    
-        
-       
         /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
+ /*java.awt.EventQueue.invokeLater(new Runnable() {
            /* public void run() {
                for(int i = 0; i < 4; i++){
                   //Menu menu = new Menu();
