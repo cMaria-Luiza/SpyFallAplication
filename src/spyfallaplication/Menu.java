@@ -22,8 +22,6 @@ import javax.swing.SwingUtilities;
 public class Menu extends javax.swing.JFrame {
 
     private SpyFallAplication jogo;
-    private Servidor servidor;
-
     /**
      * Creates new form Menu
      */
@@ -50,7 +48,18 @@ public class Menu extends javax.swing.JFrame {
         playerName = new javax.swing.JTextField();
         esperarJogadores = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
-        cartas = new javax.swing.JPanel();
+        carta1 = new javax.swing.JPanel();
+        concerto = new javax.swing.JLabel();
+        carta2 = new javax.swing.JPanel();
+        espiao = new javax.swing.JLabel();
+        carta3 = new javax.swing.JPanel();
+        escola = new javax.swing.JLabel();
+        carta4 = new javax.swing.JPanel();
+        hospital = new javax.swing.JLabel();
+        carta6 = new javax.swing.JPanel();
+        restaurante = new javax.swing.JLabel();
+        carta5 = new javax.swing.JPanel();
+        praca = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,7 +106,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(esperarJogadores)
                     .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
@@ -126,23 +135,149 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(esperarJogadores)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
-        root.add(menu, "card2");
+        root.add(menu, "menu");
 
-        javax.swing.GroupLayout cartasLayout = new javax.swing.GroupLayout(cartas);
-        cartas.setLayout(cartasLayout);
-        cartasLayout.setHorizontalGroup(
-            cartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+        carta1.setBackground(new java.awt.Color(255, 73, 71));
+
+        concerto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Concerto.png"))); // NOI18N
+
+        javax.swing.GroupLayout carta1Layout = new javax.swing.GroupLayout(carta1);
+        carta1.setLayout(carta1Layout);
+        carta1Layout.setHorizontalGroup(
+            carta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta1Layout.createSequentialGroup()
+                .addContainerGap(211, Short.MAX_VALUE)
+                .addComponent(concerto)
+                .addGap(179, 179, 179))
         );
-        cartasLayout.setVerticalGroup(
-            cartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 437, Short.MAX_VALUE)
+        carta1Layout.setVerticalGroup(
+            carta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(carta1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(concerto)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        root.add(cartas, "card3");
+        root.add(carta1, "carta1");
+
+        carta2.setBackground(new java.awt.Color(227, 73, 71));
+
+        espiao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Espião.png"))); // NOI18N
+
+        javax.swing.GroupLayout carta2Layout = new javax.swing.GroupLayout(carta2);
+        carta2.setLayout(carta2Layout);
+        carta2Layout.setHorizontalGroup(
+            carta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(espiao)
+                .addGap(203, 203, 203))
+        );
+        carta2Layout.setVerticalGroup(
+            carta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta2Layout.createSequentialGroup()
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addComponent(espiao)
+                .addGap(39, 39, 39))
+        );
+
+        root.add(carta2, "carta2");
+
+        carta3.setBackground(new java.awt.Color(227, 73, 71));
+
+        escola.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Escola.png"))); // NOI18N
+
+        javax.swing.GroupLayout carta3Layout = new javax.swing.GroupLayout(carta3);
+        carta3.setLayout(carta3Layout);
+        carta3Layout.setHorizontalGroup(
+            carta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(carta3Layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addComponent(escola)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        carta3Layout.setVerticalGroup(
+            carta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta3Layout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(escola)
+                .addGap(36, 36, 36))
+        );
+
+        root.add(carta3, "carta3");
+
+        carta4.setBackground(new java.awt.Color(227, 73, 71));
+
+        hospital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Hospital.png"))); // NOI18N
+        hospital.setToolTipText("");
+
+        javax.swing.GroupLayout carta4Layout = new javax.swing.GroupLayout(carta4);
+        carta4.setLayout(carta4Layout);
+        carta4Layout.setHorizontalGroup(
+            carta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(carta4Layout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addComponent(hospital)
+                .addContainerGap(198, Short.MAX_VALUE))
+        );
+        carta4Layout.setVerticalGroup(
+            carta4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta4Layout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(hospital)
+                .addGap(52, 52, 52))
+        );
+
+        root.add(carta4, "carta4");
+
+        carta6.setBackground(new java.awt.Color(227, 73, 71));
+
+        restaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Restaurante.png"))); // NOI18N
+
+        javax.swing.GroupLayout carta6Layout = new javax.swing.GroupLayout(carta6);
+        carta6.setLayout(carta6Layout);
+        carta6Layout.setHorizontalGroup(
+            carta6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta6Layout.createSequentialGroup()
+                .addContainerGap(236, Short.MAX_VALUE)
+                .addComponent(restaurante)
+                .addGap(154, 154, 154))
+        );
+        carta6Layout.setVerticalGroup(
+            carta6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta6Layout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(restaurante)
+                .addGap(36, 36, 36))
+        );
+
+        root.add(carta6, "carta6");
+
+        carta5.setBackground(new java.awt.Color(227, 73, 71));
+
+        praca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Praça.png"))); // NOI18N
+
+        javax.swing.GroupLayout carta5Layout = new javax.swing.GroupLayout(carta5);
+        carta5.setLayout(carta5Layout);
+        carta5Layout.setHorizontalGroup(
+            carta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(carta5Layout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(praca)
+                .addContainerGap(213, Short.MAX_VALUE))
+        );
+        carta5Layout.setVerticalGroup(
+            carta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta5Layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addComponent(praca)
+                .addGap(33, 33, 33))
+        );
+
+        root.add(carta5, "carta5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +302,9 @@ public class Menu extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Por favor insira seu nome");                    
 
                 }
-                
+                else{
+                    esperar();       
+                }
                 // verifica se o nome já foi cadastrado
                 /*for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
                     if(jogo.getJogador(i) != null && (playerName.getText() == null ? 
@@ -180,13 +317,78 @@ public class Menu extends javax.swing.JFrame {
                 //Cria o jogador e adiciona no arraylist
                 String name = playerName.getText().trim();
                 Jogador jogador = new Jogador(name);
-               
+                Servidor.cheio(jogador);
+                
             }
         };
         
         SwingUtilities.invokeLater(j);
     }                                         
 
+    
+    
+    private void esperar(){
+        new Thread(new Runnable(){
+            public void run(){
+                /*while(Servidor.j.size() != 4){
+                    esperarJogadores.setVisible(true);
+                }*/
+                CardLayout card = (CardLayout) root.getLayout();
+                //card.show(root, "carta1");
+                concerto.setVisible(false);
+                //card.show(root, "carta2");
+                espiao.setVisible(false);
+                escola.setVisible(false);
+                hospital.setVisible(false);
+                praca.setVisible(false);
+                restaurante.setVisible(false);
+                //concerto.setVisible(false);
+                
+                if(Servidor.lugar() == 3 && Servidor.id() != Servidor.espiao()){
+                    System.out.println(Servidor.lugar());
+                    card.show(root, "carta1");
+                    concerto.setVisible(true);
+                }
+                else if(Servidor.lugar() == 1 && Servidor.id() != Servidor.espiao()){
+                    System.out.println(Servidor.lugar());
+                    card.show(root, "carta6");
+                    restaurante.setVisible(true);
+                }
+                else if(Servidor.lugar() == 0 && Servidor.id() != Servidor.espiao()){
+                    System.out.println(Servidor.lugar());
+                    card.show(root, "carta4");
+                    hospital.setVisible(true);
+                }
+                else if(Servidor.lugar() == 2 && Servidor.id() != Servidor.espiao()){
+                    System.out.println(Servidor.lugar());
+                    card.show(root, "carta3");
+                    escola.setVisible(true);
+                }
+                else if(Servidor.lugar() == 4 && Servidor.id() != Servidor.espiao()){
+                    System.out.println(Servidor.lugar());
+                    card.show(root, "carta5");
+                    praca.setVisible(true);
+                }
+                else if(Servidor.id() == Servidor.espiao()){
+                    System.out.println(Servidor.lugar());
+                    card.show(root, "carta2");
+                    espiao.setVisible(true);
+                }
+               
+            }
+            
+        }).start();
+     
+            
+        /*try {
+            Chat chat = new Chat();
+            chat.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+            
+      
+    }
     
     /**
      * @param args the command line arguments
@@ -221,21 +423,31 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               new Menu().setVisible(true);
-                
+                Menu a = new Menu();
             }
         });
     }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JPanel cartas;
+    private javax.swing.JPanel carta1;
+    private javax.swing.JPanel carta2;
+    private javax.swing.JPanel carta3;
+    private javax.swing.JPanel carta4;
+    private javax.swing.JPanel carta5;
+    private javax.swing.JPanel carta6;
+    private javax.swing.JLabel concerto;
+    private javax.swing.JLabel escola;
     private javax.swing.JLabel esperarJogadores;
+    private javax.swing.JLabel espiao;
     private javax.swing.JLabel gameName;
+    private javax.swing.JLabel hospital;
     private javax.swing.JLabel icon;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel name;
     private javax.swing.JTextField playerName;
+    private javax.swing.JLabel praca;
+    private javax.swing.JLabel restaurante;
     private javax.swing.JPanel root;
     // End of variables declaration                   
 }
