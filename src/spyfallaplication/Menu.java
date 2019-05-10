@@ -5,24 +5,32 @@
  */
 package spyfallaplication;
 
+import java.awt.CardLayout;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
  *
- * @author aluno
+ * @author luciane
  */
 public class Menu extends javax.swing.JFrame {
-    private Socket socket;
+
     private SpyFallAplication jogo;
+    private Servidor servidor;
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        //jogo = new SpyFallAplication();
         esperarJogadores.setVisible(false);
-        jogo = new SpyFallAplication();
     }
 
     /**
@@ -34,166 +42,178 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        root = new javax.swing.JPanel();
+        menu = new javax.swing.JPanel();
         gameName = new javax.swing.JLabel();
-        image = new javax.swing.JLabel();
-        nome = new javax.swing.JLabel();
+        icon = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         playerName = new javax.swing.JTextField();
-        btnEntrar = new javax.swing.JButton();
         esperarJogadores = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        exit = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        btnEntrar = new javax.swing.JButton();
+        cartas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(227, 73, 71));
+        root.setBackground(new java.awt.Color(227, 73, 71));
+        root.setLayout(new java.awt.CardLayout());
+
+        menu.setBackground(new java.awt.Color(227, 73, 71));
 
         gameName.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         gameName.setForeground(new java.awt.Color(255, 255, 255));
         gameName.setText("SPY");
 
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-espião-64.png"))); // NOI18N
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-espião-64.png"))); // NOI18N
 
-        nome.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        nome.setForeground(new java.awt.Color(255, 255, 255));
-        nome.setText("Nome");
+        name.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setText("Nome");
 
-        btnEntrar.setBackground(new java.awt.Color(255, 255, 255));
+        playerName.setBackground(new java.awt.Color(255, 255, 255));
+        playerName.setForeground(new java.awt.Color(0, 0, 0));
+
+        esperarJogadores.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        esperarJogadores.setForeground(new java.awt.Color(255, 255, 255));
+        esperarJogadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Ball-1s-31px.gif"))); // NOI18N
+        esperarJogadores.setText("Esperando jogadores");
+
+        btnEntrar.setBackground(new java.awt.Color(225, 255, 255));
         btnEntrar.setForeground(new java.awt.Color(227, 73, 71));
         btnEntrar.setText("Entrar");
-        btnEntrar.setBorderPainted(false);
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
 
-        esperarJogadores.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        esperarJogadores.setForeground(new java.awt.Color(255, 255, 255));
-        esperarJogadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Ball-1s-31px.gif"))); // NOI18N
-        esperarJogadores.setText("Esperando jogadores");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(316, 316, 316)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(image)
-                            .addComponent(gameName)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(esperarJogadores)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(nome)
-                                .addGap(18, 18, 18)
-                                .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(311, 311, 311)
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(234, Short.MAX_VALUE))
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addComponent(name)
+                .addGap(30, 30, 30)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(esperarJogadores)
+                    .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(246, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gameName)
+                            .addComponent(icon))
+                        .addGap(14, 14, 14)))
+                .addGap(308, 308, 308))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addComponent(gameName)
                 .addGap(18, 18, 18)
-                .addComponent(image)
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome)
+                .addComponent(icon)
+                .addGap(54, 54, 54)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(name)
                     .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(esperarJogadores)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
+        root.add(menu, "card2");
 
-        exit.setText("Exit");
-        exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
-            }
-        });
-        jMenu1.add(exit);
+        javax.swing.GroupLayout cartasLayout = new javax.swing.GroupLayout(cartas);
+        cartas.setLayout(cartasLayout);
+        cartasLayout.setHorizontalGroup(
+            cartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 716, Short.MAX_VALUE)
+        );
+        cartasLayout.setVerticalGroup(
+            cartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 437, Short.MAX_VALUE)
+        );
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        root.add(cartas, "card3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(root, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(root, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>                        
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        Runnable j;
-        j = new Runnable() {
+        Runnable j = new Runnable() {
             @Override
             public void run() {
                 //Verifica se o jogador preencheu o campo do nome
                 if(playerName.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor insira seu nome");                    
+
                 }
                 else{
-                    if (!(jogo.salaCompleta())) {
-                        esperarJogadores.setVisible(true);
-                    }
-                    else {   // verifica se a sala está cheia, se estiver, não eh possivel se cadastrar
-                        JOptionPane.showMessageDialog(null, "Sala cheia");
+                    esperar();       
+                }
+                // verifica se o nome já foi cadastrado
+                /*for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
+                    if(jogo.getJogador(i) != null && (playerName.getText() == null ? 
+                       jogo.getJogador(i).getNome() == null : playerName.getText().equals(jogo.getJogador(i).getNome()))) {
+                        JOptionPane.showMessageDialog(null, "Por favor insira um nome diferente");
                         return;
                     }
-                    
-                    // verifica se o nome já foi cadastrado
-                    for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
-                        if(jogo.getJogador(i) != null && (playerName.getText() == null ? jogo.getJogador(i).getNome() == null : playerName.getText().equals(jogo.getJogador(i).getNome()))) {
-                            JOptionPane.showMessageDialog(null, "Por favor insira um nome diferente");
-                            return;
-                        }
-                    }
-                    //Cria o jogador e adiciona no arraylist
-                    String name = playerName.getText().trim();
-                    Jogador jogador = new Jogador(name);
-                    jogo.setJogador(jogador); 
-                    
-                    
-                    if(jogo.salaCompleta())
-                        esperarJogadores.setVisible(false);
-                }
+                }*/
                 
+                //Cria o jogador e adiciona no arraylist
+                String name = playerName.getText().trim();
+                Jogador jogador = new Jogador(name);
+                Servidor.j.add(jogador);
+                System.out.println(Servidor.j.size());
             }
         };
         
         SwingUtilities.invokeLater(j);
-    
     }                                         
 
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        System.exit(0);
-    }                                    
-
+    private void esperar(){
+        new Thread(new Runnable(){
+            public void run(){
+                while(Servidor.j.size() != 4){
+                    esperarJogadores.setVisible(true);
+                }
+                
+                CardLayout cartas = (CardLayout) root.getLayout();
+                cartas.show(root, "cartas");
+            }
+            
+        }).start();
+     
+            
+        /*try {
+            Chat chat = new Chat();
+            chat.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+            
+      
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -221,11 +241,13 @@ public class Menu extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+    
+        
+       
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
-                new Menu().setVisible(true);
+               new Menu().setVisible(true);
                 
             }
         });
@@ -233,15 +255,13 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnEntrar;
+    private javax.swing.JPanel cartas;
     private javax.swing.JLabel esperarJogadores;
-    private javax.swing.JMenuItem exit;
     private javax.swing.JLabel gameName;
-    private javax.swing.JLabel image;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel nome;
+    private javax.swing.JLabel icon;
+    private javax.swing.JPanel menu;
+    private javax.swing.JLabel name;
     private javax.swing.JTextField playerName;
+    private javax.swing.JPanel root;
     // End of variables declaration                   
 }
