@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -148,9 +149,15 @@ public class Chat extends javax.swing.JFrame {
 
     
     public void enviarMensagem(String msg) throws IOException{
-        bfw.write(msg + "\r\n");
-        texto.append(txtNome.getText() +" diz ->  "  + txtMsg.getText() + "\r\n");
-        txtMsg.setText("");
+        
+        try {
+            System.out.println("=> Enviando mensagem: " + msg);
+            bfw.write(msg) ;
+            bfw.flush();
+	} catch (IOException e) {
+            System.out.println("## ERRO: Ao enviar mensagem");
+            e.printStackTrace();
+	}
         
     }
     
@@ -218,10 +225,15 @@ public class Chat extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        Chat discussao = new Chat();
-        discussao.conectar();
-        discussao.setVisible(true);
-
+            Scanner scanner = new Scanner(System.in) ;
+		Chat cliente = new Chat();
+		cliente.conectar();
+		String mensagem = null ;
+		System.out.println("Digite uma mensagem e tecle enter, para sair digite bye");
+		while (!(mensagem = scanner.nextLine()).equalsIgnoreCase("bye") ) {
+			cliente.enviarMensagem(mensagem);
+		}
+		
        
       
         java.awt.EventQueue.invokeLater(new Runnable() {
