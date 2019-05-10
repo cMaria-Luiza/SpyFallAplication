@@ -38,7 +38,7 @@ public class Chat extends javax.swing.JFrame implements Runnable {
     public void actionPerformed(ActionEvent evt) 
     {
        //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 30m;
-       JOptionPane.showInputDialog("Seu Tempo Acabou");
+       JOptionPane.showMessageDialog(null, "Votação");
     }
 };
     

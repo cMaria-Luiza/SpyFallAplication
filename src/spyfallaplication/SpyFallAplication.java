@@ -14,12 +14,12 @@ public class SpyFallAplication {
     private static final int MAX_JOGADORES = 2;
     private static final int NUM_LUGARES = 5;
     
-    private ArrayList<Carta> cartas = new ArrayList<>(MAX_JOGADORES);
     private static ArrayList<Jogador> jogadores = new ArrayList<>(MAX_JOGADORES);
-    //private ArrayList<String> lugares = new ArrayList<>(NUM_LUGARES);
-    //private int espiaoID;
-    //private static String lugarDaPartida;
-    //private static int lugarID;
+    private ArrayList<String> lugares = new ArrayList<>(NUM_LUGARES);
+    private int espiaoID;
+    private static String lugarDaPartida;
+    private static int lugarID;
+    private static int jogadorID;
     private Jogador jogadorMaisVotado;
     private boolean espiaoGanhou;
     
@@ -30,34 +30,14 @@ public class SpyFallAplication {
     private final int PRACA = 4;
     
     public SpyFallAplication() {
-            //setLugares();
-            //sorteios();
-            //new Cliente(this);
+            setLugares();
+            for(int i = 0; i < 4; i++){
+                new Menu(this).setVisible(true);
+            }
+            
     }
     
-    /*public void criarCartas() {
-        // criar carta do espiao 
-        Carta espiao = new Carta(null);
-        cartas.add(espiao);
-        
-        // criar as demais cartas
-        for(int i =0; i < MAX_JOGADORES-1; i++) {
-            Carta carta = new Carta(lugarDaPartida);
-        }
-        
-    }
-    
-    public void darCartas() {
-        for (int i = 0; i < MAX_JOGADORES; i++) {
-            Jogador jog = jogadores.get(i);
-            if (jogadores.lastIndexOf(jog) == espiaoID) 
-                jog.setCarta(cartas.get(0)); // a carta do espiao esta sempre na primeira posicao do arraylist
-            else 
-                jog.setCarta(cartas.get(i)); 
-        }
-    }*/
-    
-    /*public void sorteios() {
+    public void sorteios() {
         
         // sortear espiao
         Sorteio sorteio1 = new Sorteio(MAX_JOGADORES);
@@ -73,17 +53,30 @@ public class SpyFallAplication {
         lugarDaPartida = lugares.get(lugarID);
         
         System.out.println(lugarDaPartida);
-    }*/
+    }
+    
+    public int getEspiao(){
+        return espiaoID;
+    }
+    
+    public int getLugar(){
+        return lugarID;
+    }
     
     public static boolean salaCompleta() {
         System.out.println(jogadores.size());
         return jogadores.size() == MAX_JOGADORES;
     }
     
-    public static void setJogador(Jogador jogador){
+    public void setJogador(Jogador jogador){
         jogadores.add(jogador);
         jogador.setID(jogadores.size()-1);
+        jogadorID = jogador.getID();
         System.out.println(jogadores.size());
+    }
+    
+    public int jogadorID(){
+        return jogadorID;
     }
     
     public int quantJogadoresOn() {
@@ -97,38 +90,14 @@ public class SpyFallAplication {
         return jogadores.get(posicao);
     }
     
-    /*private void setLugares() {
+    private void setLugares() {
         lugares.add("Hospital");
         lugares.add("Restaurante");
         lugares.add("Escola");
         lugares.add("Concerto Musical");
         lugares.add("Praça");
-    }*/
-    
-    public void votar(Jogador jogador) {
-        jogador.receberVoto();
     }
-    
-    public void contarVotos() {
-        int maior = 0;
-        for(Jogador jogador: jogadores) {
-            if (jogador.getVotos() > maior) {
-                jogadorMaisVotado = jogador;
-            } 
-        }
-    }
-    
-    public void fim() {
-        if(!(jogadorMaisVotado.ehEspiao())){
-            espiaoGanhou();
-        }
-    }
-    
-    public void espiaoGanhou() {
-        espiaoGanhou = true;
-    }
-
-    
+ 
     /**
      * @param args the command line arguments
      */

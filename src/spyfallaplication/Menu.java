@@ -6,8 +6,15 @@
 package spyfallaplication;
 
 import java.awt.CardLayout;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+
 
 /**
  *
@@ -16,13 +23,17 @@ import javax.swing.SwingUtilities;
 public class Menu extends javax.swing.JFrame {
 
     private SpyFallAplication jogo;
+    private Socket socket;
+   
+     
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(SpyFallAplication jogo) {
         initComponents();
-        //jogo = new SpyFallAplication();
+        conectar();
         esperarJogadores.setVisible(false);
+        this.jogo = jogo;
     }
 
     /**
@@ -240,17 +251,17 @@ public class Menu extends javax.swing.JFrame {
         carta6.setLayout(carta6Layout);
         carta6Layout.setHorizontalGroup(
             carta6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta6Layout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
+            .addGroup(carta6Layout.createSequentialGroup()
+                .addGap(185, 185, 185)
                 .addComponent(restaurante)
-                .addGap(154, 154, 154))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         carta6Layout.setVerticalGroup(
             carta6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta6Layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(restaurante)
-                .addGap(36, 36, 36))
+                .addGap(51, 51, 51))
         );
 
         root.add(carta6, "carta6");
@@ -264,16 +275,16 @@ public class Menu extends javax.swing.JFrame {
         carta5Layout.setHorizontalGroup(
             carta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(carta5Layout.createSequentialGroup()
-                .addGap(177, 177, 177)
+                .addGap(190, 190, 190)
                 .addComponent(praca)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         carta5Layout.setVerticalGroup(
             carta5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carta5Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+            .addGroup(carta5Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
                 .addComponent(praca)
-                .addGap(33, 33, 33))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         root.add(carta5, "carta5");
@@ -382,7 +393,8 @@ public class Menu extends javax.swing.JFrame {
                 //Cria o jogador e adiciona no arraylist
                 String name = playerName.getText().trim();
                 Jogador jogador = new Jogador(name);
-                Servidor.setJogador(jogador);
+                jogo.setJogador(jogador);
+              
                 
             }
         };
@@ -403,7 +415,16 @@ public class Menu extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
+     
+     public  void conectar(){
+        try {
+            socket = new Socket("localhost", 12345);
+        } catch (IOException ex) {
+            Logger.getLogger(SpyFallAplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
     
+ 
     
     private void esperar(){
         new Thread(new Runnable(){
@@ -417,51 +438,63 @@ public class Menu extends javax.swing.JFrame {
                 hospital.setVisible(false);
                 praca.setVisible(false);
                 restaurante.setVisible(false);
-
-                if(Servidor.getLugarID() == 3 && Servidor.id() != Servidor.getEspiaoID()){
-                    System.out.println(Servidor.lugar());
+                
+                System.out.println(jogo.getEspiao());
+                System.out.println(jogo.getLugar());
+                
+                
+                if(jogo.getLugar() == 3 && jogo.jogadorID() != jogo.getEspiao()){
                     card.show(root, "carta1");
                     concerto.setVisible(true);
                 }
-                else if(Servidor.getLugarID() == 1 && Servidor.id() != Servidor.getEspiaoID()){
-                    System.out.println(Servidor.lugar());
+                else if(jogo.getLugar() == 1 && jogo.jogadorID() != jogo.getEspiao()){
                     card.show(root, "carta6");
                     restaurante.setVisible(true);
                 }
-                else if(Servidor.getLugarID() == 0 && Servidor.id() != Servidor.getEspiaoID()){
-                    System.out.println(Servidor.lugar() + "hospital");
+                else if(jogo.getLugar() == 0 && jogo.jogadorID() != jogo.getEspiao()){
+
                     card.show(root, "carta4");
                     hospital.setVisible(true);
                 }
-                else if(Servidor.getLugarID() == 2 && Servidor.id() != Servidor.getEspiaoID()){
-                    System.out.println(Servidor.lugar());
+                else if(jogo.getLugar() == 2 && jogo.jogadorID() != jogo.getEspiao()){
+      
                     card.show(root, "carta3");
                     escola.setVisible(true);
                 }
-                else if(Servidor.getLugarID() == 4 && Servidor.id() != Servidor.getEspiaoID()){
-                    System.out.println(Servidor.lugar());
+                else if(jogo.getLugar() == 4 && jogo.jogadorID() != jogo.getEspiao()){
+
                     card.show(root, "carta5");
                     praca.setVisible(true);
                 }
-                else if(Servidor.id() == Servidor.getEspiaoID()){
-                    System.out.println(Servidor.lugar());
+                else if(jogo.jogadorID() == jogo.getEspiao()){
                     card.show(root, "carta2");
                     espiao.setVisible(true);
                 }
+                  try {
+                    Chat chat = new Chat();
+                    chat.setVisible(true);
+                    chat.conectar();
+                    chat.escutar();
+
+                    
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
+            
             
         }).start();
      
             
-        /*try {
-            Chat chat = new Chat();
-            chat.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        
             
       
     }
+    
+   
+    
     
     /**
      * @param args the command line arguments
@@ -494,11 +527,18 @@ public class Menu extends javax.swing.JFrame {
         
        
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Menu a = new Menu();
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+           /* public void run() {
+               for(int i = 0; i < 4; i++){
+                  //Menu menu = new Menu();
+                  menu.conectar();
+                  menu.setVisible(true);
+                } 
+               
+        
+        
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
