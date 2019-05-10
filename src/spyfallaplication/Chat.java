@@ -25,22 +25,14 @@ public class Chat extends javax.swing.JFrame implements Runnable {
         private OutputStream output;
         private Writer outwriter;
         private BufferedWriter bfwriter;
-        private Timer objTimer;
+       
+        
 
     public Chat() throws IOException {
-        initComponents();
-        objTimer = new Timer(((1000*60)*3), taskPerformer); 
-        objTimer.setRepeats(false); 
-         
+        initComponents();       
      }
   
-    ActionListener taskPerformer = new ActionListener() {
-    public void actionPerformed(ActionEvent evt) 
-    {
-       //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 30m;
-       JOptionPane.showMessageDialog(null, "Votação");
-    }
-};
+    
     
     public void conectar() throws IOException{
     
@@ -50,7 +42,6 @@ public class Chat extends javax.swing.JFrame implements Runnable {
         bfwriter = new BufferedWriter(outwriter);
         bfwriter.write(txtNome.getText());
         bfwriter.flush();
-        objTimer.start();
      
     }
   
@@ -162,6 +153,10 @@ public class Chat extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setNome(String nome){
+        txtNome.setText(nome);
+        txtNome.setVisible(true);
+    }
     
     public void enviarMensagem(String msg) throws IOException {
         if(msg.equals("Sair")){

@@ -6,6 +6,7 @@
 package spyfallaplication;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.Socket;
@@ -14,6 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import java.awt.event.ActionListener;
+import static java.lang.System.exit;
+import static javafx.application.Platform.exit;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 
 /**
@@ -24,7 +30,8 @@ public class Menu extends javax.swing.JFrame {
 
     private SpyFallAplication jogo;
     private Socket socket;
-   
+    private Timer objTimer;
+    private int cont;
      
     /**
      * Creates new form Menu
@@ -34,7 +41,33 @@ public class Menu extends javax.swing.JFrame {
         conectar();
         esperarJogadores.setVisible(false);
         this.jogo = jogo;
+        objTimer = new Timer(((1000*60)), taskPerformer); 
+        objTimer.setRepeats(false); 
+        cont = 0;
     }
+    
+    ActionListener taskPerformer = new ActionListener() {
+    public void actionPerformed(ActionEvent evt) 
+    {
+       //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 3m;
+        if(cont == 0){
+            try {
+                JOptionPane.showMessageDialog(null, "Votação");
+               // this.wait(100000);
+               objTimer.setDelay(1000*30);
+               objTimer.getDelay();
+                JOptionPane.showMessageDialog(null, "O espião é o jogador(a) " + jogo.getJogador(jogo.getEspiao()).getNome());
+                 System.exit(0); 
+                
+            } catch (Throwable ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "O espião é o jogador(a) " + jogo.getJogador(jogo.getEspiao()).getNome());
+            System.exit(0);
+        }
+    }
+};
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -472,9 +505,12 @@ public class Menu extends javax.swing.JFrame {
                 }
                   try {
                     Chat chat = new Chat();
+                    chat.setNome(playerName.getText().trim());
                     chat.setVisible(true);
                     chat.conectar();
+                    objTimer.start();
                     chat.escutar();
+                  
 
                     
                     
