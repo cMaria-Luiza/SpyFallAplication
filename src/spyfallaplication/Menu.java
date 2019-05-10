@@ -6,12 +6,6 @@
 package spyfallaplication;
 
 import java.awt.CardLayout;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -423,34 +417,33 @@ public class Menu extends javax.swing.JFrame {
                 hospital.setVisible(false);
                 praca.setVisible(false);
                 restaurante.setVisible(false);
-                
-                
-                if(Servidor.lugar() == 3 && Servidor.id() != Servidor.espiao()){
+
+                if(Servidor.getLugarID() == 3 && Servidor.id() != Servidor.getEspiaoID()){
                     System.out.println(Servidor.lugar());
                     card.show(root, "carta1");
                     concerto.setVisible(true);
                 }
-                else if(Servidor.lugar() == 1 && Servidor.id() != Servidor.espiao()){
+                else if(Servidor.getLugarID() == 1 && Servidor.id() != Servidor.getEspiaoID()){
                     System.out.println(Servidor.lugar());
                     card.show(root, "carta6");
                     restaurante.setVisible(true);
                 }
-                else if(Servidor.lugar() == 0 && Servidor.id() != Servidor.espiao()){
+                else if(Servidor.getLugarID() == 0 && Servidor.id() != Servidor.getEspiaoID()){
                     System.out.println(Servidor.lugar() + "hospital");
                     card.show(root, "carta4");
                     hospital.setVisible(true);
                 }
-                else if(Servidor.lugar() == 2 && Servidor.id() != Servidor.espiao()){
+                else if(Servidor.getLugarID() == 2 && Servidor.id() != Servidor.getEspiaoID()){
                     System.out.println(Servidor.lugar());
                     card.show(root, "carta3");
                     escola.setVisible(true);
                 }
-                else if(Servidor.lugar() == 4 && Servidor.id() != Servidor.espiao()){
+                else if(Servidor.getLugarID() == 4 && Servidor.id() != Servidor.getEspiaoID()){
                     System.out.println(Servidor.lugar());
                     card.show(root, "carta5");
                     praca.setVisible(true);
                 }
-                else if(Servidor.id() == Servidor.espiao()){
+                else if(Servidor.id() == Servidor.getEspiaoID()){
                     System.out.println(Servidor.lugar());
                     card.show(root, "carta2");
                     espiao.setVisible(true);

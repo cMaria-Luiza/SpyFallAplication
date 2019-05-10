@@ -6,9 +6,14 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -24,7 +29,7 @@ public class Servidor extends Thread {
      private InputStream input;
      private InputStreamReader inr;
      private BufferedReader bfr;
-     
+        
      private static int espiaoID;
      private static String lugarDaPartida;
      private static int lugarID;
@@ -39,6 +44,115 @@ public class Servidor extends Thread {
      private final int CONCERTO_MUSICAL = 3;
      private final int PRACA = 4;
      static int id;
+
+    public static ServerSocket getServidor() {
+        return servidor;
+    }
+
+    public static void setServidor(ServerSocket servidor) {
+        Servidor.servidor = servidor;
+    }
+
+    public static ArrayList<BufferedWriter> getJogadores() {
+        return jogadores;
+    }
+
+    public static void setJogadores(ArrayList<BufferedWriter> jogadores) {
+        Servidor.jogadores = jogadores;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Socket getCon() {
+        return con;
+    }
+
+    public void setCon(Socket con) {
+        this.con = con;
+    }
+
+    public InputStream getInput() {
+        return input;
+    }
+
+    public void setInput(InputStream input) {
+        this.input = input;
+    }
+
+    public InputStreamReader getInr() {
+        return inr;
+    }
+
+    public void setInr(InputStreamReader inr) {
+        this.inr = inr;
+    }
+
+    public BufferedReader getBfr() {
+        return bfr;
+    }
+
+    public void setBfr(BufferedReader bfr) {
+        this.bfr = bfr;
+    }
+
+    public static int getEspiaoID() {
+        return espiaoID;
+    }
+
+    public static void setEspiaoID(int espiaoID) {
+        Servidor.espiaoID = espiaoID;
+    }
+
+    public static String getLugarDaPartida() {
+        return lugarDaPartida;
+    }
+
+    public static void setLugarDaPartida(String lugarDaPartida) {
+        Servidor.lugarDaPartida = lugarDaPartida;
+    }
+
+    public static int getLugarID() {
+        return lugarID;
+    }
+
+    public static void setLugarID(int lugarID) {
+        Servidor.lugarID = lugarID;
+    }
+
+    public static ArrayList<String> getLugares() {
+        return lugares;
+    }
+
+    public static void setLugares(ArrayList<String> lugares) {
+        Servidor.lugares = lugares;
+    }
+
+    public static SpyFallAplication getJogo() {
+        return jogo;
+    }
+
+    public static void setJogo(SpyFallAplication jogo) {
+        Servidor.jogo = jogo;
+    }
+
+    public static ArrayList<Jogador> getJ() {
+        return j;
+    }
+
+    public static void setJ(ArrayList<Jogador> j) {
+        Servidor.j = j;
+    }
+
+
+    public static void setId(int id) {
+        Servidor.id = id;
+    }
     
      
      public Servidor(Socket con){
