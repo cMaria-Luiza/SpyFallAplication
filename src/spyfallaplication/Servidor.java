@@ -88,21 +88,20 @@ public class Servidor extends Thread {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+   public static void main(String[] args) {
        try{
           
            servidor = new ServerSocket(12345);
            jogadores = new ArrayList<BufferedWriter>();
           
-           
+          
            while(true){
                System.out.println("Aguardando conexão...");
-               Socket con = servidor.accept();
-               System.out.println("Cliente Conectado...");
-               
-               Thread t = new Servidor(con);
-               t.start();
-               
+                Socket socket = servidor.accept();
+                Runnable processaJogador = new Cliente();
+                Thread processo = new Thread(processaJogador);
+                processo.start();
+               System.out.println("Cliente Conectado...");               
            }
           
        } catch (HeadlessException | NumberFormatException | IOException ex){
