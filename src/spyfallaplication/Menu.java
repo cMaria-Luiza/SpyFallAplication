@@ -7,17 +7,12 @@ package spyfallaplication;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.event.ActionListener;
-import static java.lang.System.exit;
-import static javafx.application.Platform.exit;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -31,24 +26,22 @@ public class Menu extends javax.swing.JFrame {
     private Socket socket;
     private Timer objTimer1;
     private Timer objTimer2;
-    private int cont;
 
     /**
      * Creates new form Menu
+     * @param jogo
      */
     public Menu(SpyFallAplication jogo) {
         initComponents();
         conectar();
         esperarJogadores.setVisible(false);
         this.jogo = jogo;
-        cont = 0;
-        objTimer1 = new Timer(((1000 * 60)*3), taskPerformer1);
-        objTimer2 = new Timer(((1000 * 30)*3), taskPerformer2);
+        objTimer1 = new Timer(((1000 * 60) * 3), taskPerformer1);
+        objTimer2 = new Timer(((1000 * 30) * 3), taskPerformer2);
         objTimer1.setRepeats(false);
         objTimer2.setRepeats(false);
     }
-    
-   
+
     ActionListener taskPerformer1 = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 3m;
@@ -61,6 +54,7 @@ public class Menu extends javax.swing.JFrame {
 
         }
     };
+    
     ActionListener taskPerformer2 = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             //Aqui dentro fica todo seu codigo que o timer deve execultar a cada 3m;
@@ -419,15 +413,6 @@ public class Menu extends javax.swing.JFrame {
                 } else {
                     esperar();
                 }
-                // verifica se o nome já foi cadastrado
-                /*for(int i = 0; i < jogo.quantJogadoresOn(); i++) {
-                    if(jogo.getJogador(i) != null && (playerName.getText() == null ? 
-                       jogo.getJogador(i).getNome() == null : playerName.getText().equals(jogo.getJogador(i).getNome()))) {
-                        JOptionPane.showMessageDialog(null, "Por favor insira um nome diferente");
-                        return;
-                    }
-                }*/
-
                 //Cria o jogador e adiciona no arraylist
                 String name = playerName.getText().trim();
                 Jogador jogador = new Jogador(name);
@@ -452,6 +437,9 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
+    /*
+    *
+    */
     public void conectar() {
         try {
             socket = new Socket("localhost", 12345);
@@ -460,8 +448,12 @@ public class Menu extends javax.swing.JFrame {
         }
     }
 
+    /*
+    *
+    */
     private void esperar() {
         new Thread(new Runnable() {
+            @Override
             public void run() {
 
                 CardLayout card = (CardLayout) root.getLayout();
@@ -544,18 +536,8 @@ public class Menu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
- /*java.awt.EventQueue.invokeLater(new Runnable() {
-           /* public void run() {
-               for(int i = 0; i < 4; i++){
-                  //Menu menu = new Menu();
-                  menu.conectar();
-                  menu.setVisible(true);
-                } 
-               
-        
-        
-            }
-        });*/
+    
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

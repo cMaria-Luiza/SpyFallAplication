@@ -11,41 +11,37 @@ import java.io.Writer;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
-/**
- *
- * @author Vanessa
- */
 public class Chat extends javax.swing.JFrame implements Runnable {
-   private Socket socket;
-        private OutputStream output;
-        private Writer outwriter;
-        private BufferedWriter bfwriter;
-       
-        
 
+    private Socket socket;
+    private OutputStream output;
+    private Writer outwriter;
+    private BufferedWriter bfwriter;
+
+    /**
+     *
+     * @throws IOException
+     */
     public Chat() throws IOException {
-        initComponents();       
-     }
-  
-    
-    
-    public void conectar() throws IOException{
-    
+        initComponents();
+    }
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void conectar() throws IOException {
+
         socket = new Socket("127.0.0.1", 12345);
         output = socket.getOutputStream();
         outwriter = new OutputStreamWriter(output);
         bfwriter = new BufferedWriter(outwriter);
         bfwriter.write(txtNome.getText());
         bfwriter.flush();
-     
+
     }
-  
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,69 +149,68 @@ public class Chat extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setNome(String nome){
+    /**
+     *
+     * @param nome
+     */
+    public void setNome(String nome) {
         txtNome.setText(nome);
         txtNome.setVisible(true);
     }
-    
+
+    /**
+     *
+     * @param msg
+     * @throws IOException
+     */
     public void enviarMensagem(String msg) throws IOException {
-        if(msg.equals("Sair")){
-            bfwriter.write("Desconectado \r \n");
-            bfwriter.append("Desconectado \r \n");
-        }else{
-            bfwriter.write(msg + "\n");
-            bfwriter.append( txtNome.getText() + ":  " + msg + "\r \n"); 
-            texto.append(txtNome.getText() + ":  " + msg + "\r\n");
-        }
+        bfwriter.write(msg + "\n");
+        bfwriter.append(txtNome.getText() + ":  " + msg + "\r \n");
+        texto.append(txtNome.getText() + ":  " + msg + "\r\n");
+        
         bfwriter.flush();
         txtMsg.setText("");
     }
-    
-    
-    public void escutar() throws IOException{
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void escutar() throws IOException {
         InputStream input = socket.getInputStream();
         InputStreamReader inr = new InputStreamReader(input);
         BufferedReader bfr = new BufferedReader(inr);
         String msg = "";
-        
-        while(!"Sair".equalsIgnoreCase(msg)){
-            if(bfr.ready()){
+
+        while (true) {
+            if (bfr.ready()) {
                 msg = bfr.readLine();
-            if(msg.equals("Sair"))
-                texto.append("Servidor caiu! \r \n");
-             else
-                texto.append(msg + "\r \n");              
-            }   
+                if (msg.equals("Sair")) {
+                    texto.append("Servidor caiu! \r \n");
+                } else {
+                    texto.append(msg + "\r \n");
+                }
+            }
         }
     }
-    
-    public void sair() throws IOException{
-        enviarMensagem("Sair");
-        bfwriter.close();
-        outwriter.close();
-        output.close();
-        socket.close();
-    }
-    
-    
-    
+
+
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        if(evt.getActionCommand().equals(btnEnviar.getActionCommand())){
+        if (evt.getActionCommand().equals(btnEnviar.getActionCommand())) {
             try {
                 enviarMensagem(txtMsg.getText());
             } catch (IOException ex) {
                 Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-       this.setDefaultCloseOperation(Chat.DO_NOTHING_ON_CLOSE);  //Impede o fechamento da jFrame
-       this.dispose();
+        this.setDefaultCloseOperation(Chat.DO_NOTHING_ON_CLOSE);  //Impede o fechamento da jFrame
+        this.dispose();
     }//GEN-LAST:event_formWindowClosed
- 
-    
+
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
@@ -245,23 +240,17 @@ public class Chat extends javax.swing.JFrame implements Runnable {
         //</editor-fold>
 
         /* Create and display the form */
-        Chat app = new Chat();
-        app.conectar();
-        app.setVisible(true);
-        app.escutar();
-		
-       
-      
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-           //   new Chat().setVisible(true)
-            
-        }
+                //   new Chat().setVisible(true)
+
+            }
         });
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
     private javax.swing.JLabel jLabel2;
