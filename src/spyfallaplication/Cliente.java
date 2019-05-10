@@ -9,10 +9,11 @@ import java.util.logging.Logger;
  *
  * @author Vanessa
  */
-public class Cliente {
+public class Cliente implements Runnable{
     private Socket socket;
+    private Cliente cliente;
 
-    
+ 
     /**
      * @param args the command line arguments
      */
@@ -25,12 +26,21 @@ public class Cliente {
         }
     } 
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        //new Cliente();
-        new Cliente().conectar();
+        
         //new SpyFallAplication();
+       new Cliente().conectar();
         Menu janelaPrincipal =  new Menu();
         janelaPrincipal.setVisible(true);  
+    }
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
     
